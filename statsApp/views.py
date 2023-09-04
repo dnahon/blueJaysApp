@@ -242,7 +242,7 @@ def roster(request, team_id):
   
             list_of_hitter_dicts.append(player_dict)
 
-    return render(request,'roster.html', {'pitcher_data': list_of_pitcher_dicts, 'hitter_data' : list_of_hitter_dicts})
+    return render(request,'roster.html', {'pitcher_data': list_of_pitcher_dicts, 'hitter_data' : list_of_hitter_dicts, "team_id" : team_id})
 
 def leaders(request):
     home_runs_leaders_response = requests.get(BASE_API_URL + "/api/v1/stats/leaders?leaderCategories=homeRuns")
