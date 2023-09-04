@@ -3,11 +3,13 @@ certifi==2023.7.22
 charset-normalizer==3.2.0
 cmsplugin-nivoslider==0.5.9
 cssselect2==0.7.0
+dj-database-url==2.1.0
 Django==4.2.4
 django-classy-tags==4.1.0
 django-cms==3.11.3
 django-filer==3.0.5
 django-formtools==2.4.1
+django-on-heroku==1.1.2
 django-polymorphic==3.1.0
 django-sekizai==4.1.0
 django-treebeard==4.7
@@ -18,6 +20,7 @@ idna==3.4
 lxml==4.9.3
 packaging==23.1
 Pillow==10.0.0
+psycopg2-binary==2.9.7
 reportlab==4.0.4
 requests==2.31.0
 sgmllib3k==1.0.0
@@ -28,3 +31,4 @@ tinycss2==1.2.1
 typing_extensions==4.7.1
 urllib3==2.0.4
 webencodings==0.5.1
+whitenoise==6.5.0
