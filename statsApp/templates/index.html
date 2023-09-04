@@ -15,6 +15,12 @@
         }
     </style>
 <body style="background-color:#244D87;">
+    <div class="topnav" style="background-color:#204377; overflow: hidden; height: 100px; position: relative; margin-top: 0; padding-top:0px">
+        <a>Home</a>
+        <a>News</a>
+        <a>Contact</a>
+        <a>About</a>
+    </div>
 
     <div class="header" style="padding-left: 10%;">
         <h1 style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;"> Teams </h1>
@@ -24,7 +30,9 @@
     {% for key,value in data.items %}
         <table cellspacing="0" class="table1" style="border-collapse:collapse;border-radius: 10px; margin:15px; display: inline-block;">
             <tr style="background-color: #3e9fca; border-radius: 6px;">
-                <th style="color: white; width: 40%; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px; text-align:left;">{{key}}</th>
+                <th style="color: white; width: 40%; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px; text-align:left;">
+                    {{key}}
+                </th>
                 <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">W</th>
                 <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">L</th>
                 <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">Pct</th>
@@ -35,7 +43,14 @@
             {% for team in value %}
                 
                 <tr>
-                    <td> <a href ={% url 'team' team_id=team.id %} style="width: 40%;text-decoration: none; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;">{{team.name}}</a></td>
+                    <td> 
+                        <svg width="30" height="30">       
+                            <image xlink:href="https://www.mlbstatic.com/team-logos/{{team.id}}.svg" width="30" height="30"/>    
+                        </svg>
+                        <a href ={% url 'team' team_id=team.id %} style="width: 40%;text-decoration: none; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;">
+
+                        {{team.name}}
+                    </a></td>
                     <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{team.wins}}</td>
                     <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{team.losses}}</td>
                     <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{team.pct}}</td>
