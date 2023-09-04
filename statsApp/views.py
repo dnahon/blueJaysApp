@@ -198,6 +198,8 @@ def roster(request, team_id):
         player_dict = {"number" : number, "position" : position, "id" : player_id}
         if position == "P":
             player_response = requests.get(BASE_API_URL + "/api/v1/people/" + str(player_id) + "?hydrate=stats(group=[pitching],type=[yearByYear])")
+            bats = player_response.json().get("people")[0].get("batSide").get("code")
+            throws = player_response.json().get("people")[0].get("pitchHand").get("code")
             name = player_response.json().get("people")[0].get("lastFirstName")
             age = player_response.json().get("people")[0].get("currentAge")
             last_season_stats = [element for element in player_response.json().get("people")[0].get("stats")[0].get("splits")if element['season'] == "2023"][0].get("stat")
@@ -213,6 +215,8 @@ def roster(request, team_id):
 
             player_dict["name"] = name
             player_dict["age"] = age
+            player_dict["bats"] = bats
+            player_dict["throws"] = throws
             player_dict["innings"] = innings
             player_dict["era"] = era
             player_dict["strikeouts"] = strikeouts
@@ -227,6 +231,8 @@ def roster(request, team_id):
         else: 
             player_response = requests.get(BASE_API_URL + "/api/v1/people/" + str(player_id) + "?hydrate=stats(group=[hitting],type=[yearByYear])")
             name = player_response.json().get("people")[0].get("lastFirstName")
+            bats = player_response.json().get("people")[0].get("batSide").get("code")
+            throws = player_response.json().get("people")[0].get("pitchHand").get("code")
             age = player_response.json().get("people")[0].get("currentAge")
             last_season_stats = [element for element in player_response.json().get("people")[0].get("stats")[0].get("splits")if element['season'] == "2023"][0].get("stat")
             plate_appearances = last_season_stats.get("plateAppearances")
@@ -243,6 +249,8 @@ def roster(request, team_id):
 
             player_dict["name"] = name
             player_dict["age"] = age
+            player_dict["bats"] = bats
+            player_dict["throws"] = throws
             player_dict["plate_appearances"] = plate_appearances
             player_dict["hits"] = hits
             player_dict["doubles"] = doubles
@@ -341,6 +349,14 @@ def leaders(request):
 
 def player(request, player_id):
     initial_response = requests.get(BASE_API_URL + "/api/v1/people/" + str(player_id))
+    height = initial_response.json().get("people")[0].get("height")
+    weight = initial_response.json().get("people")[0].get("weight")
+    bats = initial_response.json().get("people")[0].get("batSide").get("code")
+    throws = initial_response.json().get("people")[0].get("pitchHand").get("code")
+    age = initial_response.json().get("people")[0].get("currentAge")
+    drafted = 'Undrafted'
+    if initial_response.json().get("people")[0].get("draftYear") is not None:
+        drafted = initial_response.json().get("people")[0].get("draftYear")
     position = initial_response.json().get("people")[0].get("primaryPosition").get("abbreviation")
 
     if (position !='P'):
@@ -354,21 +370,18 @@ def player(request, player_id):
     for season in stats:
         if (season.get("numTeams") != None):
             continue
-        print(season)
         season_stats = season.get("stat")
-
-        print(season_stats)
-        print("\n\n\n\n\n")
         season_stats["season"] = season.get("season")
         #hardship
         if (season.get("numTeams") == None):
             season_stats["team"] = teams_dict.get(season.get("team").get("name"))
+            season_stats["team_name"] = season.get("team").get("name")
             season_stats["team_id"] = season.get("team").get("id")
 
         else:
             season_stats["team"] = "Multiple"
         list_of_season_stats.append(season_stats)
 
-    print(list_of_season_stats)
+    current_team = list_of_season_stats[-1].get("team_name")
 
-    return render(request,'player.html', {'name':name, 'id' : player_id, 'position': position, "list_of_stats":list_of_season_stats})
+    return render(request,'player.html', {'team' : current_team, 'name':name, 'id' : player_id, 'height' : height, 'weight' : weight, 'bats' : bats, 'throws' : throws, 'age' : age, 'drafted' : drafted, 'position': position, "list_of_stats":list_of_season_stats})

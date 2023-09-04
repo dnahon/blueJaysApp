@@ -114,8 +114,8 @@ input:checked + .slider:before {
                 <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{hitter.number}}</td>
                 <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;"><a href ={% url 'player' player_id=hitter.id %} style="width: 40%;text-decoration: none;">{{hitter.name}}</a></td>
                 <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{hitter.age}}</td>
-                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">R</td>
-                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">R</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{hitter.bats}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{hitter.throws}}</td>
                 <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{hitter.plate_appearances}}</td>
                 <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{hitter.hits}}</td>
                 <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{hitter.doubles}}</td>
@@ -154,7 +154,7 @@ input:checked + .slider:before {
                 <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{pitcher.number}}</td>
                 <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;"><a href ={% url 'player' player_id=pitcher.id %} style="width: 40%;text-decoration: none;">{{pitcher.name}}</a></td>
                 <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{pitcher.age}}</td>
-                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">R</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{pitcher.throws}}</td>
                 <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{pitcher.innings}}</td>
                 <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{pitcher.era}}</td>
                 <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{pitcher.strikeouts}}</td>

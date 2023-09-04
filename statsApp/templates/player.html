@@ -18,7 +18,47 @@
         <a>About</a>
     </div>
 
-    <img src="https://content.mlb.com/images/headshots/current/60x60/{{id}}.png">
+    <div style="padding-left: 10%;display: inline-block;">
+        <img src="https://content.mlb.com/images/headshots/current/60x60/{{id}}@2x.png">
+    </div>
+
+    <div class="header" style=" display: inline-block;">
+        <h3 style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;"> {{name}} </h3>
+        <h4 style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;"> {{position}} {{team}} </h4>
+    </div>
+
+    <div class="header" style="display: inline-block; padding: 1%;">
+        <h3 style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;"> B/T </h3>
+    </div>
+    <div class="header" style="display: inline-block;padding: 1%;">
+        <h3 style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;"> Age </h3>
+    </div>
+    <div class="header" style="display: inline-block;padding: 1%;">
+        <h3 style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;"> Height </h3>
+    </div>
+    <div class="header" style="display: inline-block;padding: 1%;">
+        <h3 style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;"> Weight </h3>
+    </div>
+    <div class="header" style="display: inline-block;padding: 1%;">
+        <h3 style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;"> Drafted </h3>
+    </div>
+    <div class="header">
+        <h3 style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;"> {{bats}}/{{throws}} </h3>
+    </div>
+    <div class="header" style="display: inline-block;">
+        <h3 style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;"> {{age}} </h3>
+    </div>
+    <div class="header" style="display: inline-block;">
+        <h3 style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;"> {{height}} </h3>
+    </div>
+    <div class="header" style="display: inline-block;">
+        <h3 style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;"> {{weight}} </h3>
+    </div>
+    <div class="header" style="display: inline-block;">
+
+        <h3 style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;"> {{drafted}} </h3>
+    </div>
+
 
     <table cellspacing="0" class="table1" style="padding-left: 10%; float: left">
         {% if position != 'P' %}
