@@ -94,17 +94,20 @@ def home(request):
     for player in home_runs_leaders_response.json().get("leagueLeaders")[0].get("leaders"):
         home_runs = {}
         home_runs["player"] = player.get("person").get("fullName")
+        home_runs["player_id"] = player.get("person").get("id")
         home_runs["team"] = teams_dict.get(player.get("team").get("name"))
+        home_runs["team_id"] = player.get("team").get("id")
         home_runs["home_runs"] = player.get("value")
         home_runs_leaders.append(home_runs)
-
 
     steals_leaders_response = requests.get(BASE_API_URL + "/api/v1/stats/leaders?leaderCategories=stolenBases")
     steals_leaders = []
     for player in steals_leaders_response.json().get("leagueLeaders")[0].get("leaders"):
         steals = {}
         steals["player"] = player.get("person").get("fullName")
+        steals["player_id"] = player.get("person").get("id")
         steals["team"] = teams_dict.get(player.get("team").get("name"))
+        steals["team_id"] = player.get("team").get("id")
         steals["steals"] = player.get("value")
         steals_leaders.append(steals)
 
@@ -114,7 +117,9 @@ def home(request):
     for player in rbi_leaders_response.json().get("leagueLeaders")[0].get("leaders"):
         rbi = {}
         rbi["player"] = player.get("person").get("fullName")
+        rbi["player_id"] = player.get("person").get("id")
         rbi["team"] = teams_dict.get(player.get("team").get("name"))
+        rbi["team_id"] = player.get("team").get("id")
         rbi["rbi"] = player.get("value")
         rbi_leaders.append(rbi)
 
@@ -124,7 +129,9 @@ def home(request):
     for player in avg_leaders_response.json().get("leagueLeaders")[0].get("leaders"):
         avg = {}
         avg["player"] = player.get("person").get("fullName")
+        avg["player_id"] = player.get("person").get("id")
         avg["team"] = teams_dict.get(player.get("team").get("name"))
+        avg["team_id"] = player.get("team").get("id")
         avg["avg"] = player.get("value")
         avg_leaders.append(avg)
 
@@ -133,7 +140,9 @@ def home(request):
     for player in wins_leaders_response.json().get("leagueLeaders")[0].get("leaders"):
         wins = {}
         wins["player"] = player.get("person").get("fullName")
+        wins["player_id"] = player.get("person").get("id")
         wins["team"] = teams_dict.get(player.get("team").get("name"))
+        wins["team_id"] = player.get("team").get("id")
         wins["wins"] = player.get("value")
         wins_leaders.append(wins)
 
@@ -143,7 +152,9 @@ def home(request):
     for player in era_leaders_response.json().get("leagueLeaders")[0].get("leaders"):
         era = {}
         era["player"] = player.get("person").get("fullName")
+        era["player_id"] = player.get("person").get("id")
         era["team"] = teams_dict.get(player.get("team").get("name"))
+        era["team_id"] = player.get("team").get("id")
         era["era"] = player.get("value")
         era_leaders.append(era)
 
@@ -153,7 +164,9 @@ def home(request):
     for player in whip_leaders_response.json().get("leagueLeaders")[0].get("leaders"):
         whip = {}
         whip["player"] = player.get("person").get("fullName")
+        whip["player_id"] = player.get("person").get("id")
         whip["team"] = teams_dict.get(player.get("team").get("name"))
+        whip["team_id"] = player.get("team").get("id")
         whip["whip"] = player.get("value")
         whip_leaders.append(whip)
         
@@ -162,7 +175,9 @@ def home(request):
     for player in saves_leaders_response.json().get("leagueLeaders")[0].get("leaders"):
         saves = {}
         saves["player"] = player.get("person").get("fullName")
+        saves["player_id"] = player.get("person").get("id")
         saves["team"] = teams_dict.get(player.get("team").get("name"))
+        saves["team_id"] = player.get("team").get("id")
         saves["saves"] = player.get("value")
         saves_leaders.append(saves)
  
@@ -333,6 +348,7 @@ def player(request, player_id):
     else:
         player_response = requests.get(BASE_API_URL + "/api/v1/people/" + str(player_id) + "?hydrate=stats(group=[pitching],type=[yearByYear])")
     name = player_response.json().get("people")[0].get("fullName")
+    player_id = player_response.json().get("people")[0].get("id")
     stats = player_response.json().get("people")[0].get("stats")[0].get("splits")
     list_of_season_stats = []
     for season in stats:
@@ -355,4 +371,4 @@ def player(request, player_id):
 
     print(list_of_season_stats)
 
-    return render(request,'player.html', {'name':name, 'position': position, "list_of_stats":list_of_season_stats})
+    return render(request,'player.html', {'name':name, 'id' : player_id, 'position': position, "list_of_stats":list_of_season_stats})

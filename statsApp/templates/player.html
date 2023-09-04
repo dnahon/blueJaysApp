@@ -18,45 +18,47 @@
         <a>About</a>
     </div>
 
-    <table class="table1" style="padding-left: 10%; float: left">
+    <img src="https://content.mlb.com/images/headshots/current/60x60/{{id}}.png">
+
+    <table cellspacing="0" class="table1" style="padding-left: 10%; float: left">
         {% if position != 'P' %}
         <tr style="background-color: #3e9fca; ">
-            <th style="color: white;">Year</th>
-            <th style="color: white; width: 40%">Team</th>
-            <th style="color: white;">G</th>
-            <th style="color: white;">PA</th>
-            <th style="color: white;">AB</th>
-            <th style="color: white;">R</th>
-            <th style="color: white;">H</th>
-            <th style="color: white;">2B</th>
-            <th style="color: white;">3B</th>
-            <th style="color: white;">HR</th>
-            <th style="color: white;">RBI</th>
-            <th style="color: white;">SB</th>
-            <th style="color: white;">BB</th>
-            <th style="color: white;">SO</th>
-            <th style="color: white;">OBP</th>
-            <th style="color: white;">SLG</th>
-            <th style="color: white;">OPS</th>
+            <th style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">Year</th>
+            <th style="color: white; width: 40%; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">Team</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">G</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">PA</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">AB</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">R</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">H</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">2B</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">3B</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">HR</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">RBI</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">SB</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">BB</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">SO</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">OBP</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">SLG</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">OPS</th>
         </tr>
 
         {% else %}
         <tr style="background-color: #3e9fca; ">
-            <th style="color: white;">Year</th>
-            <th style="color: white; width: 40%">Team</th>
-            <th style="color: white;">G</th>
-            <th style="color: white;">IP</th>
-            <th style="color: white;">W</th>
-            <th style="color: white;">L</th>
-            <th style="color: white;">SV</th>
-            <th style="color: white;">ERA</th>
-            <th style="color: white;">WHIP</th>
-            <th style="color: white;">H</th>
-            <th style="color: white;">R</th>
-            <th style="color: white;">SO</th>
-            <th style="color: white;">BB</th>
-            <th style="color: white;">HR/9</th>
-            <th style="color: white;">OPS</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">Year</th>
+            <th style="color: white; width: 40%;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">Team</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">G</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">IP</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">W</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">L</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">SV</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">ERA</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">WHIP</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">H</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">R</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">SO</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">BB</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">HR/9</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">OPS</th>
         </tr>
         {% endif %}
 
@@ -65,53 +67,59 @@
 
             {% if position != 'P' %}
             <tr>
-                <td>{{season.season}}</td>
-                <td> 
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{season.season}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px; text-align: center;"> 
                     {% if season.team != "Multiple"%}
-                    <a href ={% url 'team' team_id=season.team_id %} style="width: 40%;text-decoration: none;">{{season.team}}</a>
+                    <svg width="30" height="30">       
+                        <image xlink:href="https://www.mlbstatic.com/team-logos/{{season.team_id}}.svg" width="30" height="30"/>    
+                    </svg>
+                    <a href ={% url 'team' team_id=season.team_id %} style="width: 40%;text-decoration: none; ">{{season.team}}</a>
                     {% else %}
                     {{season.team}}
                     {% endif %}
                 </td>
-                <td>{{season.gamesPlayed}}</td>
-                <td>{{season.plateAppearances}}</td>
-                <td>{{season.atBats}}</td>
-                <td>{{season.runs}}</td>
-                <td>{{season.hits}}</td>
-                <td>{{season.doubles}}</td>
-                <td>{{season.triples}}</td>
-                <td>{{season.homeRuns}}</td>
-                <td>{{season.rbi}}</td>
-                <td>{{season.stolenBases}}</td>
-                <td>{{season.baseOnBalls}}</td>
-                <td>{{season.strikeOuts}}</td>
-                <td>{{season.obp}}</td>
-                <td>{{season.slg}}</td>
-                <td>{{season.ops}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{season.gamesPlayed}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{season.plateAppearances}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{season.atBats}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{season.runs}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{season.hits}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{season.doubles}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{season.triples}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{season.homeRuns}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{season.rbi}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{season.stolenBases}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{season.baseOnBalls}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{season.strikeOuts}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{season.obp}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{season.slg}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{season.ops}}</td>
             </tr>
             {% else %}
             <tr>
-                <td>{{season.season}}</td>
-                <td> 
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{season.season}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;text-align: center;"> 
                     {% if season.team != "Multiple"%}
+                    <svg width="30" height="30">       
+                        <image xlink:href="https://www.mlbstatic.com/team-logos/{{season.team_id}}.svg" width="30" height="30"/>    
+                    </svg>
                     <a href ={% url 'team' team_id=season.team_id %} style="width: 40%;text-decoration: none;">{{season.team}}</a>
                     {% else %}
                     {{season.team}}
                     {% endif %}                
                 </td>
-                <td>{{season.gamesPlayed}}</td>
-                <td>{{season.inningsPitched}}</td>
-                <td>{{season.wins}}</td>
-                <td>{{season.losses}}</td>
-                <td>{{season.saves}}</td>
-                <td>{{season.era}}</td>
-                <td>{{season.whip}}</td>
-                <td>{{season.hits}}</td>
-                <td>{{season.runs}}</td>
-                <td>{{season.strikeOuts}}</td>
-                <td>{{season.baseOnBalls}}</td>
-                <td>{{season.homeRunsPer9}}</td>
-                <td>{{season.ops}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{season.gamesPlayed}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{season.inningsPitched}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{season.wins}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{season.losses}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{season.saves}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{season.era}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{season.whip}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{season.hits}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{season.runs}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{season.strikeOuts}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{season.baseOnBalls}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{season.homeRunsPer9}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{season.ops}}</td>
             </tr>
             {% endif %}
         {% endfor %}
