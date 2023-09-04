@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM Plex Sans Condensed">
+    <style>
+        .table1 tr:nth-child(even){
+            background: white;
+        }
+
+        .table1 tr:nth-child(odd){
+            background: #dddddd;
+        }
+    </style>
+<body style="background-color:#244D87;">
+    <div class="topnav" style="background-color:#204377; overflow: hidden; height: 100px; position: relative; margin-top: 0; padding-top:0px">
+        <a>Home</a>
+        <a>News</a>
+        <a>Contact</a>
+        <a>About</a>
+    </div>
+
+    <table class="table1" style="padding-left: 10%; float: left">
+        {% if position != 'P' %}
+        <tr style="background-color: #3e9fca; ">
+            <th style="color: white;">Year</th>
+            <th style="color: white; width: 40%">Team</th>
+            <th style="color: white;">G</th>
+            <th style="color: white;">PA</th>
+            <th style="color: white;">AB</th>
+            <th style="color: white;">R</th>
+            <th style="color: white;">H</th>
+            <th style="color: white;">2B</th>
+            <th style="color: white;">3B</th>
+            <th style="color: white;">HR</th>
+            <th style="color: white;">RBI</th>
+            <th style="color: white;">SB</th>
+            <th style="color: white;">BB</th>
+            <th style="color: white;">SO</th>
+            <th style="color: white;">OBP</th>
+            <th style="color: white;">SLG</th>
+            <th style="color: white;">OPS</th>
+        </tr>
+
+        {% else %}
+        <tr style="background-color: #3e9fca; ">
+            <th style="color: white;">Year</th>
+            <th style="color: white; width: 40%">Team</th>
+            <th style="color: white;">G</th>
+            <th style="color: white;">IP</th>
+            <th style="color: white;">W</th>
+            <th style="color: white;">L</th>
+            <th style="color: white;">SV</th>
+            <th style="color: white;">ERA</th>
+            <th style="color: white;">WHIP</th>
+            <th style="color: white;">H</th>
+            <th style="color: white;">R</th>
+            <th style="color: white;">SO</th>
+            <th style="color: white;">BB</th>
+            <th style="color: white;">HR/9</th>
+            <th style="color: white;">OPS</th>
+        </tr>
+        {% endif %}
+
+        {% for season in list_of_stats %}
+
+
+            {% if position != 'P' %}
+            <tr>
+                <td>{{season.season}}</td>
+                <td> 
+                    {% if season.team != "Multiple"%}
+                    <a href ={% url 'team' team_id=season.team_id %} style="width: 40%;text-decoration: none;">{{season.team}}</a>
+                    {% else %}
+                    {{season.team}}
+                    {% endif %}
+                </td>
+                <td>{{season.gamesPlayed}}</td>
+                <td>{{season.plateAppearances}}</td>
+                <td>{{season.atBats}}</td>
+                <td>{{season.runs}}</td>
+                <td>{{season.hits}}</td>
+                <td>{{season.doubles}}</td>
+                <td>{{season.triples}}</td>
+                <td>{{season.homeRuns}}</td>
+                <td>{{season.rbi}}</td>
+                <td>{{season.stolenBases}}</td>
+                <td>{{season.baseOnBalls}}</td>
+                <td>{{season.strikeOuts}}</td>
+                <td>{{season.obp}}</td>
+                <td>{{season.slg}}</td>
+                <td>{{season.ops}}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td>{{season.season}}</td>
+                <td> 
+                    {% if season.team != "Multiple"%}
+                    <a href ={% url 'team' team_id=season.team_id %} style="width: 40%;text-decoration: none;">{{season.team}}</a>
+                    {% else %}
+                    {{season.team}}
+                    {% endif %}                
+                </td>
+                <td>{{season.gamesPlayed}}</td>
+                <td>{{season.inningsPitched}}</td>
+                <td>{{season.wins}}</td>
+                <td>{{season.losses}}</td>
+                <td>{{season.saves}}</td>
+                <td>{{season.era}}</td>
+                <td>{{season.whip}}</td>
+                <td>{{season.hits}}</td>
+                <td>{{season.runs}}</td>
+                <td>{{season.strikeOuts}}</td>
+                <td>{{season.baseOnBalls}}</td>
+                <td>{{season.homeRunsPer9}}</td>
+                <td>{{season.ops}}</td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+</body>
+</html>

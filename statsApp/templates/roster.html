@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM Plex Sans Condensed">
+    <style>
+        .table1 tr:nth-child(even){
+            background: white;
+        }
+
+        .table1 tr:nth-child(odd){
+            background: #dddddd;
+        }
+
+        .switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+    </style>
+<body style="background-color:#244D87;">
+    <div class="topnav" style="background-color:#204377; overflow: hidden; height: 100px; position: relative; margin-top: 0; padding-top:0px">
+        <a>Home</a>
+        <a>News</a>
+        <a>Contact</a>
+        <a>About</a>
+    </div>
+
+    <label onkeypress="colorModePreview()"  id="toggle" class="switch">
+        <input onkeypress="colorModePreview()" type="checkbox">
+        <span class="slider round"></span>
+     </label>
+
+    <table cellspacing="0" class="table1" id="hitter" style="padding-left: 10%; border-collapse:collapse;border-radius: 10px; margin:15px; display: inline-block;">
+        <tr style="background-color: #3e9fca; ">
+            <th style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">Pos</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">#</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">Player</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">Age</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">B</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">T</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">PA</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">H</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">2B</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">3B</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">HR</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">SB</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">SO%</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">BB%</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">AVG</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">OBP</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">OPS</th>
+        </tr>
+        {% for hitter in hitter_data %}
+            
+            <tr>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{hitter.position}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{hitter.number}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;"><a href ={% url 'player' player_id=hitter.id %} style="width: 40%;text-decoration: none;">{{hitter.name}}</a></td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{hitter.age}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">R</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">R</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{hitter.plate_appearances}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{hitter.hits}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{hitter.doubles}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{hitter.triples}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{hitter.home_runs}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{hitter.steals}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{hitter.strikeout_percentage}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{hitter.walk_percentage}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{hitter.average}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{hitter.obp}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{hitter.ops}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <table cellspacing="0"  class="table1" id="pitcher" style="padding-left: 10%; border-collapse:collapse;border-radius: 10px; margin:15px; display: inline-block;">
+        <tr style="background-color: #3e9fca; ">
+            <th style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">Pos</th>
+            <th style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">#</th>
+            <th style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">Pitcher</th>
+            <th style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">Age</th>
+            <th style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">T</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">IP</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">ERA</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">SO</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">BB</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">SO%</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">BB%</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">HR/9</th>
+            <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">OPS</th>
+        </tr>
+        {% for pitcher in pitcher_data %}
+            
+            <tr>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{pitcher.position}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{pitcher.number}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;"><a href ={% url 'player' player_id=pitcher.id %} style="width: 40%;text-decoration: none;">{{pitcher.name}}</a></td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{pitcher.age}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">R</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{pitcher.innings}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{pitcher.era}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{pitcher.strikeouts}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{pitcher.walks}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{pitcher.strikeout_percentage}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{pitcher.walk_percentage}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{pitcher.home_runs}}</td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{pitcher.ops}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js">
+        function colorModePreview() {
+            var ele = document.getElementById("toggle")
+            console.log("we made it")
+            if (ele.prop("checked") == true) {
+                $('body').addClass('white-preview');
+                document.getElementById("hitter").style.display = "block";
+                document.getElementById("pitcher").style.display = "none";
+            }
+            else if (ele.prop("checked") == false) {
+                $('body').addClass('white-preview');
+                document.getElementById("hitter").style.display = "none";
+                document.getElementById("pitcher").style.display = "block";
+            }
+        }
+    </script> 
+</body>
+</html>

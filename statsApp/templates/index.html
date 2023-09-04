@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM Plex Sans Condensed">
+    <style>
+        .table1 tr:nth-child(even){
+            background: white;
+        }
+
+        .table1 tr:nth-child(odd){
+            background: #dddddd;
+        }
+        .table1 { 
+            border-radius: 13px; 
+            border-spacing: 0;
+        }
+    </style>
+<body style="background-color:#244D87;">
+    <div class="topnav" style="background-color:#204377; overflow: hidden; height: 100px; position: relative; margin-top: 0; padding-top:0px">
+        <a>Home</a>
+        <a>News</a>
+        <a>Contact</a>
+        <a>About</a>
+    </div>
+
+    <div class="header" style="padding-left: 10%;">
+        <h1 style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;"> Teams </h1>
+    </div>
+
+
+    {% for key,value in data.items %}
+        <table cellspacing="0" class="table1" style="border-collapse:collapse;border-radius: 10px; margin:15px; display: inline-block;">
+            <tr style="background-color: #3e9fca; border-radius: 6px;">
+                <th style="color: white; width: 40%; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px; text-align:left;">{{key}}</th>
+                <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">W</th>
+                <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">L</th>
+                <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">Pct</th>
+                <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">GB</th>
+                <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">L10</th>
+                <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">Diff</th>
+            </tr>
+            {% for team in value %}
+                
+                <tr>
+                    <td> <a href ={% url 'team' team_id=team.id %} style="width: 40%;text-decoration: none; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;">{{team.name}}</a></td>
+                    <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{team.wins}}</td>
+                    <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{team.losses}}</td>
+                    <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{team.pct}}</td>
+                    <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{team.games_back}}</td>
+                    <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{team.last_ten_wins}}-{{team.last_ten_losses}}</td>
+                    <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{team.run_differential}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endfor %}
+
+    <div class="header" style="padding-left: 10%;">
+        <h1 style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;"> League Leaders </h1>
+    </div>
+
+    <div class="header" style="padding-left: 25%;display: inline-block;">
+        <h1 style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;"> Hitting </h1>
+    </div>
+
+    <div class="header" style="display: inline-block;padding-left: 50%;">
+        <h1 style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;"> Pitching </h1>
+    </div>
+
+    <div style="padding-left: 5%; display: inline-block;width:100%">
+
+        <table class="table1" style="padding-left: 10%; border-collapse:collapse;border-radius: 10px; margin:15px;width:45%">
+            <tr style="background-color: #3e9fca; ">
+                <th style="color: white; width: 40%; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">Player</th>
+                <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">Team</th>
+                <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">Batting Average</th>
+            </tr>
+            {% for leader in avg %}
+                
+                <tr>
+                    <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px; text-align: center;">{{leader.player}}</td>
+                    <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;text-align: center;">{{leader.team}}</td>
+                    <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;text-align: center;">{{leader.avg}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <table class="table1" style="padding-left: 10%; border-collapse:collapse;border-radius: 10px; margin:15px;width:45%">
+            <tr style="background-color: #3e9fca; ">
+                <th style="color: white; width: 40%; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">Player</th>
+                <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">Team</th>
+                <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">RBI</th>
+            </tr>
+            {% for leader in rbi %}
+                
+                <tr>
+                    <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;text-align: center;">{{leader.player}}</td>
+                    <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;text-align: center;">{{leader.team}}</td>
+                    <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;text-align: center;">{{leader.rbi}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <table class="table1" style="padding-left: 10%; border-collapse:collapse;border-radius: 10px; margin:15px;width:45%">
+            <tr style="background-color: #3e9fca; ">
+                <th style="color: white; width: 40%; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">Player</th>
+                <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">Team</th>
+                <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">Home Runs</th>
+            </tr>
+            {% for leader in home_runs %}
+                
+                <tr>
+                    <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;text-align: center;">{{leader.player}}</td>
+                    <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;text-align: center;">{{leader.team}}</td>
+                    <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;text-align: center;">{{leader.home_runs}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <table class="table1" style="padding-left: 10%; border-collapse:collapse;border-radius: 10px; margin:15px;width:45%">
+            <tr style="background-color: #3e9fca; ">
+                <th style="color: white; width: 40%; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">Player</th>
+                <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">Team</th>
+                <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">Steals</th>
+            </tr>
+            {% for leader in steals %}
+                
+                <tr>
+                    <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;text-align: center;">{{leader.player}}</td>
+                    <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;text-align: center;">{{leader.team}}</td>
+                    <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;text-align: center;">{{leader.steals}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+    </div>  
+
+    <div style="display: inline-block;">
+
+        <table class="table1" style="padding-left: 10%; border-collapse:collapse;border-radius: 10px; margin:15px;width:95%">
+            <tr style="background-color: #3e9fca; ">
+                <th style="color: white; width: 40%; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">Player</th>
+                <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">Team</th>
+                <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">Wins</th>
+            </tr>
+            {% for leader in wins %}
+                
+                <tr>
+                    <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;text-align: center;">{{leader.player}}</td>
+                    <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;text-align: center;">{{leader.team}}</td>
+                    <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;text-align: center;">{{leader.wins}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <table class="table1" style="padding-left: 10%; border-collapse:collapse;border-radius: 10px; margin:15px;width:45%">
+            <tr style="background-color: #3e9fca; ">
+                <th style="color: white; width: 40%; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">Player</th>
+                <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">Team</th>
+                <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">ERA</th>
+            </tr>
+            {% for leader in era %}
+                
+                <tr>
+                    <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;text-align: center;">{{leader.player}}</td>
+                    <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;text-align: center;">{{leader.team}}</td>
+                    <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;text-align: center;">{{leader.era}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <table class="table1" style="padding-left: 10%; border-collapse:collapse;border-radius: 10px; margin:15px;width:45%">
+            <tr style="background-color: #3e9fca; ">
+                <th style="color: white; width: 40%; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">Player</th>
+                <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">Team</th>
+                <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">WHIP</th>
+            </tr>
+            {% for leader in whip %}
+                
+                <tr>
+                    <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;text-align: center;">{{leader.player}}</td>
+                    <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;text-align: center;">{{leader.team}}</td>
+                    <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;text-align: center;">{{leader.whip}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <table class="table1" style="padding-left: 10%; border-collapse:collapse;border-radius: 10px; margin:15px;width:45%">
+            <tr style="background-color: #3e9fca; ">
+                <th style="color: white; width: 40%; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">Player</th>
+                <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">Team</th>
+                <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">Saves</th>
+            </tr>
+            {% for leader in saves %}
+                
+                <tr>
+                    <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;text-align: center;">{{leader.player}}</td>
+                    <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;text-align: center;">{{leader.team}}</td>
+                    <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;text-align: center;">{{leader.saves}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div class="header" style="padding-left: 10%;">
+        <h1 style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;"> News </h1>
+    </div>
+
+    {% for story in news %}
+    {% endfor %}
+    
+</body>
+</html>
