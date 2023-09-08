@@ -4,10 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM Plex Sans Condensed">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <div class="topnav" style="background-color:#204377; overflow: hidden; height: 100px; position: relative; margin-top: 0; padding-top:0px; width: 100%;">
+            <ul class="nav nav-pills" style=" display: inline-block; padding-left: 80%;margin-top: 20px;">
+                <li class="active"><a id="teams-toggle" data-toggle="pill" onclick="location.href = '/home'">Home</a></li>
+            </ul>
+        </div>
     </head>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM Plex Sans Condensed">
     <style>
         .table1 tr:nth-child(even){
             background: white;
@@ -62,13 +67,6 @@
 
  </style>
 <body style="background-color:#244D87;">
-    <div class="topnav" style="background-color:#204377; overflow: hidden; height: 100px; position: relative; margin-top: 0; padding-top:0px">
-        <a>Home</a>
-        <a>News</a>
-        <a>Contact</a>
-        <a>About</a>
-    </div>
-
     <div style="padding-left: 10%; display: inline-block;">
         <svg width="90" height="90">       
             <image xlink:href="https://www.mlbstatic.com/team-logos/{{team_id}}.svg" width="90" height="90"/>    

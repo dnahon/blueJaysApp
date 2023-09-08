@@ -20,7 +20,6 @@ from statsApp import views
 
 urlpatterns = [
     path('home/', views.home, name='home'),
-    path('leaders/', views.leaders, name='leaders'),
     path('team/<int:team_id>', views.roster, name='team'),
     path('player/<int:player_id>', views.player, name='player'),
     path('admin/', admin.site.urls),

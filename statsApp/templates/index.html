@@ -5,6 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM Plex Sans Condensed">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <div class="topnav" style="background-color:#204377; overflow: hidden; height: 100px; position: relative; margin-top: 0; padding-top:0px; width: 100%;">
@@ -14,7 +15,6 @@
             </ul>
         </div>
     </head>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM Plex Sans Condensed">
     <style>
         .table1 tr:nth-child(even){
             background: white;
@@ -76,6 +76,22 @@
         </div>
     
         {% for story in news %}
+            {% if forloop.counter == 1 %}
+            <div style="padding-left: 10%; display: inline-block;width:30%; padding-right: 15px;">
+            {% else %}
+            <div style="display: inline-block;width:20%; padding-right: 15px;">
+            {% endif %}
+                <div class="image" style="background-color:white; border: 1px solid black;">
+                    <img src="{{story.image}}" style="max-width:100%; height: auto;width: auto;" >
+                    <h4>
+                        <a href="{{story.link}}">{{story.title}}</a>
+                    </h4>
+                    <p>
+                        {{story.author}} {{story.time}}
+                    </p>
+                </div>
+            </div>
+
         {% endfor %}
     </div>
 
