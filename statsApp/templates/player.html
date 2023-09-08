@@ -23,42 +23,31 @@
     </div>
 
     <div class="header" style=" display: inline-block;">
-        <h3 style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;"> {{name}} </h3>
-        <h4 style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;"> {{position}} {{team}} </h4>
+        <h3 style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal; margin-top: 0; margin-bottom: 0;"> {{name}} </h3>
+        <h4 style="color: #3e9fca; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal; display: inline-block; margin-top: 0;margin-bottom: 0;"> {{position}} </h4>
+        <h4 style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal; display: inline-block; margin-top: 0;margin-bottom: 0;"> {{team}} </h4>
     </div>
 
-    <div class="header" style="display: inline-block; padding: 1%;">
-        <h3 style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;"> B/T </h3>
-    </div>
-    <div class="header" style="display: inline-block;padding: 1%;">
-        <h3 style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;"> Age </h3>
-    </div>
-    <div class="header" style="display: inline-block;padding: 1%;">
-        <h3 style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;"> Height </h3>
-    </div>
-    <div class="header" style="display: inline-block;padding: 1%;">
-        <h3 style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;"> Weight </h3>
-    </div>
-    <div class="header" style="display: inline-block;padding: 1%;">
-        <h3 style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;"> Drafted </h3>
-    </div>
-    <div class="header">
-        <h3 style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;"> {{bats}}/{{throws}} </h3>
-    </div>
-    <div class="header" style="display: inline-block;">
-        <h3 style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;"> {{age}} </h3>
-    </div>
-    <div class="header" style="display: inline-block;">
-        <h3 style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;"> {{height}} </h3>
-    </div>
-    <div class="header" style="display: inline-block;">
-        <h3 style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;"> {{weight}} </h3>
-    </div>
-    <div class="header" style="display: inline-block;">
-
-        <h3 style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;"> {{drafted}} </h3>
-    </div>
-
+    {% if position != 'P' %}
+    <table class="table1" style="display: inline-block; padding-left: 49%; border-collapse:collapse;border-radius: 10px; margin:15px;width:45%;">
+    {% else %}
+    <table class="table1" style="display: inline-block; padding-left:39%; border-collapse:collapse;border-radius: 10px; margin:15px;width:45%;">
+    {% endif %}
+        <tr style="background-color: #244D87; ">
+            <th style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding-right: 15px;"> B/T </th>
+            <th style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding-right: 15px;"> Age</th>
+            <th style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding-right: 15px;"> Height </th>
+            <th style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding-right: 15px;"> Weight</th>
+            <th style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding-right: 15px;"> Drafted</th>
+        </tr>
+        <tr style="background-color: #244D87; ">
+            <th style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding-right: 15px;"> {{bats}}/{{throws}} </th>
+            <th style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding-right: 15px;"> {{age}}</th>
+            <th style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding-right: 15px;"> {{height}} </th>
+            <th style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding-right: 15px;"> {{weight}}</th>
+            <th style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding-right: 15px;"> {{drafted}}</th>
+        </tr>
+    </table>
 
     <table cellspacing="0" class="table1" style="padding-left: 10%; float: left">
         {% if position != 'P' %}

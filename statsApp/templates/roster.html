@@ -1,5 +1,12 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </head>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM Plex Sans Condensed">
     <style>
         .table1 tr:nth-child(even){
@@ -10,66 +17,50 @@
             background: #dddddd;
         }
 
-        .switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-}
+        /* toggle in label designing */
+    .toggle {
+        position : relative ;
+        display : inline-block;
+        width : 100px;
+        height : 52px;
+        border-radius: 30px;
+        border: 2px solid gray;
+    }
+           
+    /* After slide changes */
+    .toggle:after {
+        content: '';
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: gray;
+        top: 1px;
+        left: 1px;
+        transition:  all 0.5s;
+    }
+           
+    /* Toggle text */
+    p {
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bold;
+    }
+           
+    /* Checkbox checked effect */
+    .checkbox:checked + .toggle::after {
+        left : 49px;
+    }
+           
+    /* Checkbox checked toggle label bg color */
+    .checkbox:checked + .toggle {
+    }
+           
+    /* Checkbox vanished */
+    .checkbox {
+        display : none;
+    }
 
-.switch input { 
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-input:checked + .slider {
-  background-color: #2196F3;
-}
-
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
-}
-
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-
-/* Rounded sliders */
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
-}
-    </style>
+ </style>
 <body style="background-color:#244D87;">
     <div class="topnav" style="background-color:#204377; overflow: hidden; height: 100px; position: relative; margin-top: 0; padding-top:0px">
         <a>Home</a>
@@ -78,16 +69,30 @@ input:checked + .slider:before {
         <a>About</a>
     </div>
 
-    <svg width="90" height="90">       
-        <image xlink:href="https://www.mlbstatic.com/team-logos/{{team_id}}.svg" width="90" height="90"/>    
-    </svg>
+    <div style="padding-left: 10%; display: inline-block;">
+        <svg width="90" height="90">       
+            <image xlink:href="https://www.mlbstatic.com/team-logos/{{team_id}}.svg" width="90" height="90"/>    
+        </svg>
+    </div>
+    <div class="header" style=" display: inline-block;position: relative; bottom: 20px;">
+        <h3 style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal; margin-top: 0;margin-bottom: 0;"> {{team_name}} </h3>
+        <h4 style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;margin-top: 0;margin-bottom: 0;"> {{position}} {{team}} </h4>
+    </div>
 
-    <label onkeypress="colorModePreview()"  id="toggle" class="switch">
-        <input onkeypress="colorModePreview()" type="checkbox">
-        <span class="slider round"></span>
-     </label>
+    <ul class="nav nav-pills" style=" display: inline-block; padding-left: 30%;">
+        <li class="active"><a id="hitter-toggle" data-toggle="pill" href="#home" onclick='togglePosition(this.id);'>Hitters</a></li>
+        <li><a id="pitcher-toggle" data-toggle="pill" href="#menu1" onclick='togglePosition(this.id);'>Pitchers</a></li>
+    </ul>
 
-    <table cellspacing="0" class="table1" id="hitter" style="padding-left: 10%; border-collapse:collapse;border-radius: 10px; margin:15px; display: inline-block;">
+    <!-- <input onclick='togglePosition();' type="checkbox" id="switch" class="checkbox" />
+     
+    <label for="switch" class="toggle">
+        <p>
+            Hitters    Pitchers
+        </p>
+    </label> -->
+
+    <table cellspacing="0" class="table1" id="hitter" style="width:80%; table-layout: fixed ;padding-left: 10%; border-collapse:collapse;border-radius: 10px; margin:15px; display: inline-block;">
         <tr style="background-color: #3e9fca; ">
             <th style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">Pos</th>
             <th style="color: white;font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">#</th>
@@ -112,7 +117,10 @@ input:checked + .slider:before {
             <tr>
                 <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{hitter.position}}</td>
                 <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{hitter.number}}</td>
-                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;"><a href ={% url 'player' player_id=hitter.id %} style="width: 40%;text-decoration: none;">{{hitter.name}}</a></td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">
+                    <img src="https://content.mlb.com/images/headshots/current/60x60/{{hitter.id}}.png">
+                    <a href ={% url 'player' player_id=hitter.id %} style="width: 40%;text-decoration: none;">{{hitter.name}}</a>
+                </td>
                 <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{hitter.age}}</td>
                 <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{hitter.bats}}</td>
                 <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{hitter.throws}}</td>
@@ -131,7 +139,7 @@ input:checked + .slider:before {
         {% endfor %}
     </table>
 
-    <table cellspacing="0"  class="table1" id="pitcher" style="padding-left: 10%; border-collapse:collapse;border-radius: 10px; margin:15px; display: inline-block;">
+    <table cellspacing="0"  class="table1" id="pitcher" style="width:100%;padding-left: 10%; border-collapse:collapse;border-radius: 10px; margin:15px; display: inline-block;display: none;">
         <tr style="background-color: #3e9fca; ">
             <th style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">Pos</th>
             <th style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">#</th>
@@ -152,7 +160,10 @@ input:checked + .slider:before {
             <tr>
                 <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{pitcher.position}}</td>
                 <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{pitcher.number}}</td>
-                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;"><a href ={% url 'player' player_id=pitcher.id %} style="width: 40%;text-decoration: none;">{{pitcher.name}}</a></td>
+                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">
+                    <img src="https://content.mlb.com/images/headshots/current/60x60/{{pitcher.id}}.png">
+                    <a href ={% url 'player' player_id=pitcher.id %} style="width: 40%;text-decoration: none;">{{pitcher.name}}</a>
+                </td>
                 <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{pitcher.age}}</td>
                 <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{pitcher.throws}}</td>
                 <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding: 15px;">{{pitcher.innings}}</td>
@@ -167,21 +178,17 @@ input:checked + .slider:before {
         {% endfor %}
     </table>
 
-    <script src="http://code.jquery.com/jquery-1.11.0.min.js">
-        function colorModePreview() {
-            var ele = document.getElementById("toggle")
-            console.log("we made it")
-            if (ele.prop("checked") == true) {
-                $('body').addClass('white-preview');
-                document.getElementById("hitter").style.display = "block";
-                document.getElementById("pitcher").style.display = "none";
-            }
-            else if (ele.prop("checked") == false) {
-                $('body').addClass('white-preview');
+    <script>
+        function togglePosition(clicked_id) {
+            if (clicked_id=="pitcher-toggle") {
                 document.getElementById("hitter").style.display = "none";
                 document.getElementById("pitcher").style.display = "block";
             }
+            else {
+                document.getElementById("hitter").style.display = "block";
+                document.getElementById("pitcher").style.display = "none";
+            }
         }
-    </script> 
+    </script>
 </body>
 </html>
