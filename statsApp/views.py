@@ -113,7 +113,16 @@ def home(request):
             player_info["team"] = teams_dict.get(player.get("team").get("name"))
             player_info["team_id"] = player.get("team").get("id")
             player_info["value"] = player.get("value")
+
             leaders_list.append(player_info)
+        if len(leaders_list) > 5:
+            last_dict = leaders_list[4]
+            after_last_dict = leaders_list[5]
+            if (last_dict.get("value") == after_last_dict.get("value") ):
+                last_dict["player"] = last_dict["player"] + " & " + str(len(leaders_list) - 5) + " more"
+
+            leaders_list[4] = last_dict
+            leaders_list = leaders_list[0:5]
 
         leaders_data[categories_dict.get(category)] = leaders_list
  
