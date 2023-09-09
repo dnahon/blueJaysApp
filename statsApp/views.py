@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 
 BASE_API_URL = "https://statsapi.mlb.com"
 
+#Create a dictionary to map the full team name to the team abbreviation
 teams_dict = {
     "Arizona Diamondbacks" : "AZ",
     "Atlanta Braves" : "ATL", 
@@ -42,6 +43,7 @@ teams_dict = {
     "Washington Nationals" : "WAS"
 }
 
+#Create a dictionary to map the leader category for the API call to the actual leader category name
 categories_dict = {
     "battingAverage" : "Batting Average",
     "runsBattedIn" : "RBI", 
@@ -55,18 +57,25 @@ categories_dict = {
 
 def home(request):
 
-    dict_to_render = {}
+    # Initialize an empty dictionary to hold standings by division
+    division_standings_map = {}
 
+    # Fetch standings data from the API
     standings_response = requests.get(BASE_API_URL + "/api/v1/standings?leagueId=103,104")
-
     records_by_div = standings_response.json().get("records")
 
+    # Process standings data by division
     for div in records_by_div:
         division_response = requests.get(BASE_API_URL + div.get("division").get("link"))
         division_name = division_response.json().get("divisions")[0].get("nameShort")
+
+        #Get the records for each team
         records_by_team = div.get("teamRecords")
 
+        #Initialize an empty list to story all the team data
         list_of_team_dicts = []
+
+        #Iterate through every team in the division, extract relevant team information
         for team in records_by_team:
             team_id = team.get("team").get("id")
             team_name = team.get("team").get("name")
@@ -83,13 +92,20 @@ def home(request):
 
             team_dict = {"id" : team_id, "name" : team_abbreviation, "wins": team_wins, "losses" : team_losses, "pct" : pct, "games_back" : games_back, "last_ten_wins" : last_ten_wins, "last_ten_losses" : last_ten_losses,  "run_differential" : run_differential}
             list_of_team_dicts.append(team_dict)
-        dict_to_render[division_name] = list_of_team_dicts
+        division_standings_map[division_name] = list_of_team_dicts
 
+    # Fetch and process news data
     url = 'https://www.mlb.com/feeds/news/rss.xml'
     news = feedparser.parse(url)
     soup = BeautifulSoup(requests.get(url).text, features="xml")
+
+    #Extract image links from the XML file
     images = soup.find_all('image')
+
+    #Initialize an empty list to hold news entry data
     list_of_news_entries = []
+
+    #Iterate through the news entries, extracting relevant information
     for idx, entry in enumerate(news.get("entries")):
         news_entry_dict = {}
         news_entry_dict["title"] = entry.get("title")
@@ -101,15 +117,24 @@ def home(request):
 
         list_of_news_entries.append(news_entry_dict)
 
+        #We only want 4 news entries 
         if len(list_of_news_entries) > 3:
             break
 
+    #Create a list of categories that we want to get the leaders for
     categories = ['homeRuns', 'stolenBases', 'runsBattedIn', 'battingAverage', 'wins', 'era', 'whip', 'saves']
 
+    #Create a dictionary to story the leaders data
     leaders_data = {}
+
+    #Iterate through the categories
     for category in categories:
+
+        #Get the leaders data for this category from the API
         leader_response = requests.get(BASE_API_URL + "/api/v1/stats/leaders?leaderCategories=" + category)
         leaders_list = []
+
+        #Iterate through each leader, extractng the relevant data
         for player in leader_response.json().get("leagueLeaders")[0].get("leaders"):
             player_info = {}
             player_info["player"] = player.get("person").get("fullName")
@@ -119,6 +144,8 @@ def home(request):
             player_info["value"] = player.get("value")
 
             leaders_list.append(player_info)
+
+        #Handle ties in the leaderboard
         if len(leaders_list) > 5:
             last_dict = leaders_list[4]
             after_last_dict = leaders_list[5]
@@ -129,12 +156,16 @@ def home(request):
             leaders_list = leaders_list[0:5]
 
         leaders_data[categories_dict.get(category)] = leaders_list
-
-    print(list_of_news_entries)
  
-    return render(request,'index.html', {'data': dict_to_render, 'news' : list_of_news_entries, 'leaders_data' : leaders_data})
+    desired_order_list = ["Home Runs", "Wins", "Stolen Bases", "ERA", "RBI", "WHIP", "Batting Average", "Saves"]
+    reordered_leaders_data = {k: leaders_data[k] for k in desired_order_list}
+    #Render the page with relevant data
+    return render(request,'v2/index.html', {'data': division_standings_map, 'news' : list_of_news_entries, 'leaders_data' : reordered_leaders_data})
 
 def roster(request, team_id):
+    test= requests.get(BASE_API_URL + "/api/v1/teams/" + str(team_id) + "/coaches")
+    print(test.json())
+
     initial_team_response = requests.get(BASE_API_URL + "/api/v1/teams/" + str(team_id))
 
     roster_response = requests.get(BASE_API_URL + "/api/v1/teams/" + str(team_id) + "/roster")
@@ -210,7 +241,7 @@ def roster(request, team_id):
         player_dict["bats"] = bats
         player_dict["throws"] = throws
 
-    return render(request,'roster.html', {'pitcher_data': list_of_pitcher_dicts, 'hitter_data' : list_of_hitter_dicts, "team_id" : team_id, 'team_name' : team_name})
+    return render(request,'v2/roster.html', {'pitcher_data': list_of_pitcher_dicts, 'hitter_data' : list_of_hitter_dicts, "team_id" : team_id, 'team_name' : team_name})
 
 def player(request, player_id):
     basic_player_attributes_response = requests.get(BASE_API_URL + "/api/v1/people/" + str(player_id))
@@ -252,5 +283,6 @@ def player(request, player_id):
         list_of_season_stats.append(season_stats)
 
     current_team = list_of_season_stats[-1].get("team_name")
+    current_team_id = list_of_season_stats[-1].get("team_id")
 
-    return render(request, 'player.html', {'team' : current_team, 'name':name, 'id' : player_id, 'height' : height, 'weight' : weight, 'bats' : bats, 'throws' : throws, 'age' : age, 'drafted' : drafted, 'position': position, "list_of_stats":list_of_season_stats})
+    return render(request, 'v2/player.html', {'team_id' : current_team_id, 'team' : current_team, 'name':name, 'id' : player_id, 'height' : height, 'weight' : weight, 'bats' : bats, 'throws' : throws, 'age' : age, 'drafted' : drafted, 'position': position, "list_of_stats":list_of_season_stats})

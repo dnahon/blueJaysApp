@@ -1,0 +1,159 @@
+{% extends 'v2/base.html' %}
+
+{% block content %}
+
+<head>
+
+    <!-- Custom styles for this page -->
+    <style>
+        .card-header {
+            background-color: #3e9fca !important;
+        }
+
+        .m-0 {
+            color: white !important;
+        }
+    </style>
+</head>
+<div id="teamsTitle" class="row px-6">
+    <div class="col-12">
+        <h1 style="color: white; font-family: 'IBM Plex Sans Condensed'; "> Teams </h1>
+
+    </div>
+</div>
+<div id="teams" class="row px-6">
+    {% for key,value in data.items %}
+    <div class="col-sm-12 col-md-6 col-lg-4">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">{{key}}</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>W</th>
+                                <th>L</th>
+                                <th>Pct</th>
+                                <th>GB</th>
+                                <th>L10</th>
+                                <th>Diff</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for team in value %}
+                            <tr>
+                                <td>
+                                    <svg width="30" height="30">       
+                                        <image xlink:href="https://www.mlbstatic.com/team-logos/{{team.id}}.svg" width="30" height="30"/>    
+                                    </svg>
+                                    <a href ={% url 'team' team_id=team.id %}>
+                                        {{team.name}}
+                                    </a>
+                                </td>
+                                <td>{{team.wins}}</td>
+                                <td>{{team.losses}}</td>
+                                <td>{{team.pct}}</td>
+                                <td>{{team.games_back}}</td>
+                                <td>{{team.last_ten_wins}}-{{team.last_ten_losses}}</td>
+                                <td>{{team.run_differential}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<div id="newsTitle" class="row px-6">
+    <div class="col-12">
+        <h1 style="color: white; font-family: 'IBM Plex Sans Condensed'; "> News </h1>
+
+    </div>
+</div>
+<div id="news" class="row px-6">
+    {% for story in news %}
+    <div class="col-sm-12 col-md-3 col-lg-3">
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <img src="{{story.image}}" style="max-width:100%; height: auto;width: auto;" >
+                    <h4>
+                        <a href="{{story.link}}">{{story.title}}</a>
+                    </h4>
+                    <p>
+                        {{story.author}} {{story.time}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<div id="leadersTitle" class="row px-6">
+    <div class="col-12">
+        <h1 style="color: white; font-family: 'IBM Plex Sans Condensed';"> Leaders </h1>
+    </div>
+</div>
+<div id="leadersCategories" class="row px-6">
+    <div class="col-6">
+        <h3 style="color: white; font-family: 'IBM Plex Sans Condensed'; text-align: center;"> Hitting </h3>
+    </div>
+    <div class="col-6">
+        <h3 style="color: white; font-family: 'IBM Plex Sans Condensed'; text-align: center;"> Pitching </h3>
+    </div>
+</div>
+
+<div id="leaders" class="row px-6">
+    {% for key,value in leaders_data.items %}
+    <div class="col-6">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">{{key}}</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Player</th>
+                                <th style="text-align: center;"> Team</th>
+                                <th style="text-align: center;">{{key}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for leader in value %}
+                            <tr>
+                                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;;">
+                                    <img src="https://content.mlb.com/images/headshots/current/60x60/{{leader.player_id}}.png">
+                                    <a href ={% url 'player' player_id=leader.player_id %} style="text-decoration: none;">
+                                        {{leader.player}}
+                                    </a>
+                                </td>
+                                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal; text-align: center;">
+                                    <svg width="30" height="30">       
+                                        <image xlink:href="https://www.mlbstatic.com/team-logos/{{leader.team_id}}.svg" width="30" height="30"/>    
+                                    </svg>    
+                                    <a href ={% url 'team' team_id=leader.team_id %} style="text-decoration: none; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal; text-align: center;">
+                                        {{leader.team}}
+                                    </a>
+                                </td>
+                                <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal; text-align: center;">{{leader.value}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}
+{% block js %}
+
+{% endblock js %}
