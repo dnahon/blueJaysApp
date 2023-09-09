@@ -386,6 +386,7 @@ def player(request, player_id):
     stats = player_stats.get("stats")[0].get("splits")
     list_of_season_stats = []
     for season in stats:
+        #If the player played for multiple season in a season, skip, we will see their stats for each team seperately
         if (season.get("numTeams") != None):
             continue
         season_stats = season.get("stat")
