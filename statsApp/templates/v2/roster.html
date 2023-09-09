@@ -45,9 +45,13 @@
             <img class="img-profile rounded-circle" src="https://www.mlbstatic.com/team-logos/{{team_id}}.svg" width="90" height="90">
         </a>
     </div>
-    <div class="col-auto">
+    <div class="col-2">
         <span class="ml-n4 d-block text-white h3 mt-4">{{team_name}}</span>
-        <span class="ml-n4 text-white h5">DONT FORGET TO CHANGE</span>
+        {% if rank != "1st" %}
+        <span class="ml-n4 text-white small">{{rank}} in {{division}} {{wins}} - {{losses}} ({{pct}}) • {{games_back}} GB</span>
+        {% else %}
+        <span class="ml-n4 text-white small">{{rank}} in {{division}} {{wins}} - {{losses}} ({{pct}})</span>
+        {% endif %}
     </div>
     <div class="col-9 vertical-align-pills">
         <ul class="nav nav-pills">

@@ -53,11 +53,11 @@
                 <h1 style="color: white; font-family: 'IBM Plex Sans Condensed'; " class="mb-2 d-block"> Teams </h1>
             </div>
 
-            {% for key,value in data.items %}
+            {% for division,team_data in division_data.items %}
             <div class="col-sm-12 col-md-6 col-lg-4">
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">{{key}}</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">{{division}}</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -74,7 +74,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% for team in value %}
+                                    {% for team in team_data %}
                                     <tr>
                                         <td>
                                             <svg width="30" height="30">       
@@ -126,7 +126,7 @@
 
         <div class="row px-6">
             <div class="col-12  my-4">
-                <h1 style="color: white; font-family: 'IBM Plex Sans Condensed'; " class="mb-2 d-block"> Recent Results </h1>
+                <h1 style="color: white; font-family: 'IBM Plex Sans Condensed'; " class="mb-2 d-block"> Results </h1>
             </div>
 
             {% for game in game_data %}
@@ -148,6 +148,8 @@
                                             {% endif %}
                                         </a>
                                     </td>
+                                    {{game.game_state}}
+                                    {% if game.winner != "None" %}
                                     <td>
                                         {% if game.winner == "Away" %}
                                         <b>{{game.away_team_score}}</b>
@@ -155,6 +157,7 @@
                                         {{game.away_team_score}}
                                         {% endif %}
                                     </td>
+                                    {% endif %}
                                 </tr>
                                 <tr style="background-color: white !important; ">
                                     <td>
@@ -162,20 +165,22 @@
                                             <image xlink:href="https://www.mlbstatic.com/team-logos/{{game.home_team_id}}.svg" width="30" height="30"/>    
                                         </svg>
                                         <a href ={% url 'team' team_id=game.away_team_id %}>
-                                            {% if game.winner != "Away" %}
+                                            {% if game.winner == "Home" %}
                                                 <b>{{game.home_team_name}}</b>
                                             {% else %}
                                                 {{game.home_team_name}}
                                             {% endif %}
                                         </a>
                                     </td>
+                                    {% if game.winner != "None" %}
                                     <td>
-                                        {% if game.winner != "Away" %}
+                                        {% if game.winner == "Home" %}
                                         <b>{{game.home_team_score}}</b>
                                         {% else %}
                                         {{game.home_team_score}}
                                         {% endif %}
                                     </td>
+                                    {% endif %}
                                 </tr>
                             </table>
                         </div>
@@ -201,7 +206,7 @@
             </div>
         </div>
         <div  class="row px-6">
-            {% for key,value in leaders_data.items %}
+            {% for category,leader_data in leaders_data.items %}
             <div class="col-6">
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
@@ -214,11 +219,11 @@
                                     <tr>
                                         <th>Player</th>
                                         <th style="text-align: center;"> Team</th>
-                                        <th style="text-align: center;">{{key}}</th>
+                                        <th style="text-align: center;">{{category}}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% for leader in value %}
+                                    {% for leader in leader_data %}
                                     <tr>
                                         <td style="font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;;">
                                             <img src="https://content.mlb.com/images/headshots/current/60x60/{{leader.player_id}}.png">

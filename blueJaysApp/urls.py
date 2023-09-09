@@ -24,3 +24,6 @@ urlpatterns = [
     path('player/<int:player_id>', views.player, name='player'),
     path('admin/', admin.site.urls),
 ]
+
+handler404 = 'statsApp.views.handler404'
+handler500 = 'statsApp.views.handler500'
