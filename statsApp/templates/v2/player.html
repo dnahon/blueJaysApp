@@ -176,19 +176,3 @@
     </div>
 </div>
 {% endblock content %}
-
-{% block js %}
-<script>
-    function togglePosition(clicked_id) {
-        if (clicked_id=="pitcher-toggle") {
-            document.getElementById("hitter").style.display = "none";
-            document.getElementById("pitcher").style.display = "block";
-        }
-        else {
-            document.getElementById("hitter").style.display = "block";
-            document.getElementById("pitcher").style.display = "none";
-        }
-    }
-</script>
-
-{% endblock js %}

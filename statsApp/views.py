@@ -192,7 +192,7 @@ def roster(request, team_id):
             ops = last_season_stats.get("ops")
 
             player_dict["innings"] = innings
-            player_dict["era"] = erarint
+            player_dict["era"] = era
             player_dict["strikeouts"] = strikeouts
             player_dict["walks"] = walks
             player_dict["home_runs"] = home_runs
