@@ -1,160 +1,181 @@
 {% extends 'v2/base.html' %}
 
+{% block stylesheet %}
+<style>
+.first:first-child {
+    background-color: #3e9fca !important;
+    color:white
+}
+.card-header {
+    background-color: #3e9fca !important;
+}
+
+.m-0 {
+    color: white !important;
+}
+</style>
+<style>
+    /* Custom CSS for pill-shaped tabs */
+    .nav-pills .nav-link {
+            border-radius: 50px; /* Adjust the value to control the pill shape */
+            margin-left: 5px; /* Add space between pills */
+            color: #fff; /* Text color for unselected tabs */
+        }
+        .nav-pills .nav-link.active {
+            border-bottom: 2px solid #007bff; /* Selected tab highlight color */
+            color: #fff; /* Text color for unselected tabs */
+        }
+
+    .vertical-align-pills {
+            display: flex;
+            justify-content: flex-end; /* Align pills to the right */
+            align-items: center; /* Vertically center pills */
+            height: 100px; /* Adjust the height as needed */
+        }
+
+</style>
+{% endblock stylesheet %}
+
+
 {% block content %}
-<head>
 
-    <!-- Custom styles for this page -->
-    <style>
-        .first:first-child {
-            background-color: #3e9fca !important;
-            color:white
-        }
-        .card-header {
-            background-color: #3e9fca !important;
-        }
-
-        .m-0 {
-            color: white !important;
-        }
-    </style>
-</head>
-<div class="row align-items-end px-3" >
-    <div class="col-1">
-        <div>
-            <svg width="90" height="90">       
-                <image xlink:href="https://www.mlbstatic.com/team-logos/{{team_id}}.svg" width="90" height="90"/>    
-            </svg>
-        </div>
+<div class="row mb-2" >
+    <div class="col-auto">
+        <a class="nav-link" href="#">
+            <img class="img-profile rounded-circle" src="https://www.mlbstatic.com/team-logos/{{team_id}}.svg" width="90" height="90">
+        </a>
     </div>
-    <div class="col-3">
-        <div>
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">{{team_name}}</h6>
-            </div>
-        </div>
+    <div class="col-auto">
+        <span class="ml-n4 d-block text-white h3 mt-4">Douglas McGee</span>
+        <span class="ml-n4 text-white h5">DONT FORGET TO CHANGE</span>
     </div>
-    <!-- Grow In Utility -->
-    <div class="col-3">
-
-        <div class="dropdown mb-4">
-            <button class="btn btn-primary dropdown-toggle" type="button"
-                id="dropdownMenuButton" data-bs-toggle="dropdown" data-toggle="dropdown" aria-haspopup="true"aria-expanded="false">
-                Dropdown
-            </button>
-            <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-        </div>              
+    <div class="col-9 vertical-align-pills">
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a class="nav-link active" id="hitter-tab" data-bs-toggle="tab" data-bs-target="#hitter" type="button" role="tab" aria-controls="hitter" aria-selected="true">Hitters</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="leaderboard-tab" data-bs-toggle="tab" data-bs-target="#leaderboard" type="button" role="tab" aria-controls="leaderboard" aria-selected="true">Pitchers</a>
+            </li>
+        </ul>
     </div>
 </div>
-<div class="row px-3">
-    <div class="col-12">
-        <div class="card shadow mb-4">
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr class="first">
-                                <th>Pos</th>
-                                <th>#</th>
-                                <th>Player</th>
-                                <th>Age</th>
-                                <th>B</th>
-                                <th>T</th>
-                                <th>PA</th>
-                                <th>H</th>
-                                <th>2B</th>
-                                <th>3B</th>
-                                <th>HR</th>
-                                <th>SB</th>
-                                <th>SO%</th>
-                                <th>BB%</th>
-                                <th>AVG</th>
-                                <th>OBP</th>
-                                <th>OPS</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for hitter in hitter_data %}
-                            <tr>
-                                <td>{{hitter.position}}</td>
-                                <td>{{hitter.number}}</td>
-                                <td>
-                                    <img src="https://content.mlb.com/images/headshots/current/60x60/{{hitter.id}}.png">
-                                    <a href ={% url 'player' player_id=hitter.id %} style="width: 40%;text-decoration: none;">{{hitter.name}}</a>
-                                </td>
-                                <td>{{hitter.age}}</td>
-                                <td>{{hitter.bats}}</td>
-                                <td>{{hitter.throws}}</td>
-                                <td>{{hitter.plate_appearances}}</td>
-                                <td>{{hitter.hits}}</td>
-                                <td>{{hitter.doubles}}</td>
-                                <td>{{hitter.triples}}</td>
-                                <td>{{hitter.home_runs}}</td>
-                                <td>{{hitter.steals}}</td>
-                                <td>{{hitter.strikeout_percentage}}</td>
-                                <td>{{hitter.walk_percentage}}</td>
-                                <td>{{hitter.average}}</td>
-                                <td>{{hitter.obp}}</td>
-                                <td>{{hitter.ops}}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+
+
+
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="hitter" role="tabpanel" aria-labelledby="hitter-tab">
+        <div class="row px-3">
+            <div class="col-12">
+                <div class="card shadow mb-4">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr class="first">
+                                        <th>Pos</th>
+                                        <th>#</th>
+                                        <th>Player</th>
+                                        <th>Age</th>
+                                        <th>B</th>
+                                        <th>T</th>
+                                        <th>PA</th>
+                                        <th>H</th>
+                                        <th>2B</th>
+                                        <th>3B</th>
+                                        <th>HR</th>
+                                        <th>SB</th>
+                                        <th>SO%</th>
+                                        <th>BB%</th>
+                                        <th>AVG</th>
+                                        <th>OBP</th>
+                                        <th>OPS</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for hitter in hitter_data %}
+                                    <tr>
+                                        <td>{{hitter.position}}</td>
+                                        <td>{{hitter.number}}</td>
+                                        <td>
+                                            <img src="https://content.mlb.com/images/headshots/current/60x60/{{hitter.id}}.png">
+                                            <a href ={% url 'player' player_id=hitter.id %} style="width: 40%;text-decoration: none;">{{hitter.name}}</a>
+                                        </td>
+                                        <td>{{hitter.age}}</td>
+                                        <td>{{hitter.bats}}</td>
+                                        <td>{{hitter.throws}}</td>
+                                        <td>{{hitter.plate_appearances}}</td>
+                                        <td>{{hitter.hits}}</td>
+                                        <td>{{hitter.doubles}}</td>
+                                        <td>{{hitter.triples}}</td>
+                                        <td>{{hitter.home_runs}}</td>
+                                        <td>{{hitter.steals}}</td>
+                                        <td>{{hitter.strikeout_percentage}}</td>
+                                        <td>{{hitter.walk_percentage}}</td>
+                                        <td>{{hitter.average}}</td>
+                                        <td>{{hitter.obp}}</td>
+                                        <td>{{hitter.ops}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        
     </div>
-</div>
 
-<div class="row px-3">
-    <div class="col-12">
-        <div class="card shadow mb-4">
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr class="first">
-                                <th>Pos</th>
-                                <th>#</th>
-                                <th>Pitcher</th>
-                                <th>Age</th>
-                                <th>T</th>
-                                <th>IP</th>
-                                <th>ERA</th>
-                                <th>SO</th>
-                                <th>BB</th>
-                                <th>SO%</th>
-                                <th>BB%</th>
-                                <th>HR/9</th>
-                                <th>OPS</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for pitcher in pitcher_data %}
-                            <tr>
-                                <td>{{pitcher.position}}</td>
-                                <td>{{pitcher.number}}</td>
-                                <td>
-                                    <img src="https://content.mlb.com/images/headshots/current/60x60/{{pitcher.id}}.png">
-                                    <a href ={% url 'player' player_id=pitcher.id %} style="width: 40%;text-decoration: none;">{{pitcher.name}}</a>
-                                </td>
-                                <td>{{pitcher.age}}</td>
-                                <td>{{pitcher.throws}}</td>
-                                <td>{{pitcher.innings}}</td>
-                                <td>{{pitcher.era}}</td>
-                                <td>{{pitcher.strikeouts}}</td>
-                                <td>{{pitcher.walks}}</td>
-                                <td>{{pitcher.strikeout_percentage}}</td>
-                                <td>{{pitcher.walk_percentage}}</td>
-                                <td>{{pitcher.home_runs}}</td>
-                                <td>{{pitcher.ops}}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+    <div class="tab-pane fade" id="leaderboard" role="tabpanel" aria-labelledby="leaderboard-tab">
+        <div class="row px-3">
+            <div class="col-12">
+                <div class="card shadow mb-4">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr class="first">
+                                        <th>Pos</th>
+                                        <th>#</th>
+                                        <th>Pitcher</th>
+                                        <th>Age</th>
+                                        <th>T</th>
+                                        <th>IP</th>
+                                        <th>ERA</th>
+                                        <th>SO</th>
+                                        <th>BB</th>
+                                        <th>SO%</th>
+                                        <th>BB%</th>
+                                        <th>HR/9</th>
+                                        <th>OPS</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for pitcher in pitcher_data %}
+                                    <tr>
+                                        <td>{{pitcher.position}}</td>
+                                        <td>{{pitcher.number}}</td>
+                                        <td>
+                                            <img src="https://content.mlb.com/images/headshots/current/60x60/{{pitcher.id}}.png">
+                                            <a href ={% url 'player' player_id=pitcher.id %} style="width: 40%;text-decoration: none;">{{pitcher.name}}</a>
+                                        </td>
+                                        <td>{{pitcher.age}}</td>
+                                        <td>{{pitcher.throws}}</td>
+                                        <td>{{pitcher.innings}}</td>
+                                        <td>{{pitcher.era}}</td>
+                                        <td>{{pitcher.strikeouts}}</td>
+                                        <td>{{pitcher.walks}}</td>
+                                        <td>{{pitcher.strikeout_percentage}}</td>
+                                        <td>{{pitcher.walk_percentage}}</td>
+                                        <td>{{pitcher.home_runs}}</td>
+                                        <td>{{pitcher.ops}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -164,17 +185,4 @@
 {% endblock content %}
 
 {% block js %}
-<script>
-    function togglePosition(clicked_id) {
-        if (clicked_id=="pitcher-toggle") {
-            document.getElementById("hitter").style.display = "none";
-            document.getElementById("pitcher").style.display = "block";
-        }
-        else {
-            document.getElementById("hitter").style.display = "block";
-            document.getElementById("pitcher").style.display = "none";
-        }
-    }
-</script>
-
 {% endblock js %}
