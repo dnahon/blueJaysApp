@@ -29,11 +29,11 @@ Follow these steps to set up and run blueJaysApp:
 
 ### 1. Clone the Repository
 
-Clone the Homebase repository to your local machine:
+Clone the blueJaysApp repository to your local machine:
 
 ```shell
 git clone https://github.com/dnahon/blueJaysApp.git
-cd homebase
+cd blueJaysApp
 ```
 
 ### 2. Navigate to the blueJaysApp Directory
