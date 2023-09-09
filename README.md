@@ -21,13 +21,11 @@ To run blueJaysApp, ensure that you have the following dependencies installed on
 - Django 3.x
 - Virtualenv (recommended for creating isolated Python environments)
 
-Additionally, you should have a basic understanding of Django and web development.
-
 ---
 
 ## Installation
 
-Follow these steps to set up and run blueJaysApp within the Homebase repository:
+Follow these steps to set up and run blueJaysApp:
 
 ### 1. Clone the Repository
 
