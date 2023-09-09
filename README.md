@@ -90,9 +90,10 @@ Here are the possible environment variables that you may need to configure, depe
 
 There are three main pages on the blueJaysApp:
 
-- The homepage contains two tabs: one with MLB divisional standings and news, and the other tab with updated league leaders.
+- The homepage contains two tabs: one with MLB divisional standings, news, and that day's game results, and the other tab with updated league leaders.
 - The team page contains information about every player on the roster. Users can switch between viewing the hitters and pitchers of the team.
 - The player page contains season-by-season stats for that player.
+- If the user goes to a random URL, there is an error page with a redirect button back to the home page.
 
 This is how users can navigate between pages:
 
