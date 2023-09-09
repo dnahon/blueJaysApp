@@ -32,7 +32,7 @@ Follow these steps to set up and run blueJaysApp:
 Clone the Homebase repository to your local machine:
 
 ```shell
-git clone https://github.com/yourusername/homebase.git
+git clone https://github.com/dnahon/blueJaysApp.git
 cd homebase
 ```
 
