@@ -159,12 +159,28 @@ def home(request):
  
     desired_order_list = ["Home Runs", "Wins", "Stolen Bases", "ERA", "RBI", "WHIP", "Batting Average", "Saves"]
     reordered_leaders_data = {k: leaders_data[k] for k in desired_order_list}
+
+
+    recent_games_response = requests.get(BASE_API_URL + "/api/v1/schedule?sportId=1")
+
+    list_of_games = []
+    for game in recent_games_response.json().get("dates")[0].get("games"):
+        game_data = {}
+        game_data["away_team_id"] = game.get("teams").get("away").get("team").get("id")
+        game_data["away_team_name"] = game.get("teams").get("away").get("team").get("name")
+        game_data["away_team_score"] = game.get("teams").get("away").get("score")
+        game_data["home_team_id"] = game.get("teams").get("home").get("team").get("id")
+        game_data["home_team_name"] = game.get("teams").get("home").get("team").get("name")
+        game_data["home_team_score"] = game.get("teams").get("home").get("score")
+        if int(game_data["away_team_score"]) > int(game_data["home_team_score"]):
+            game_data["winner"] = "Away"
+        else:
+            game_data["winner"] = "Home"
+        list_of_games.append(game_data)
     #Render the page with relevant data
-    return render(request,'v2/index.html', {'data': division_standings_map, 'news' : list_of_news_entries, 'leaders_data' : reordered_leaders_data})
+    return render(request,'v2/index.html', {'data': division_standings_map, 'news' : list_of_news_entries, 'leaders_data' : reordered_leaders_data, 'game_data' : list_of_games})
 
 def roster(request, team_id):
-    test= requests.get(BASE_API_URL + "/api/v1/teams/" + str(team_id) + "/coaches")
-
     initial_team_response = requests.get(BASE_API_URL + "/api/v1/teams/" + str(team_id))
 
     roster_response = requests.get(BASE_API_URL + "/api/v1/teams/" + str(team_id) + "/roster")

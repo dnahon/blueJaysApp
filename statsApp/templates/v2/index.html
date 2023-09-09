@@ -123,6 +123,67 @@
             </div>
             {% endfor %}
         </div>
+
+        <div class="row px-6">
+            <div class="col-12  my-4">
+                <h1 style="color: white; font-family: 'IBM Plex Sans Condensed'; " class="mb-2 d-block"> Recent Results </h1>
+            </div>
+
+            {% for game in game_data %}
+            <div class="col-sm-12 col-md-3 col-lg-3">
+                <div class="card shadow mb-4">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <tr style="background-color: white !important; ">
+                                    <td>
+                                        <svg width="30" height="30">       
+                                            <image xlink:href="https://www.mlbstatic.com/team-logos/{{game.away_team_id}}.svg" width="30" height="30"/>    
+                                        </svg>
+                                        <a href ={% url 'team' team_id=game.away_team_id %}>
+                                            {% if game.winner == "Away" %}
+                                                <b>{{game.away_team_name}}</b>
+                                            {% else %}
+                                                {{game.away_team_name}}
+                                            {% endif %}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        {% if game.winner == "Away" %}
+                                        <b>{{game.away_team_score}}</b>
+                                        {% else %}
+                                        {{game.away_team_score}}
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr style="background-color: white !important; ">
+                                    <td>
+                                        <svg width="30" height="30">       
+                                            <image xlink:href="https://www.mlbstatic.com/team-logos/{{game.home_team_id}}.svg" width="30" height="30"/>    
+                                        </svg>
+                                        <a href ={% url 'team' team_id=game.away_team_id %}>
+                                            {% if game.winner != "Away" %}
+                                                <b>{{game.home_team_name}}</b>
+                                            {% else %}
+                                                {{game.home_team_name}}
+                                            {% endif %}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        {% if game.winner != "Away" %}
+                                        <b>{{game.home_team_score}}</b>
+                                        {% else %}
+                                        {{game.home_team_score}}
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </div>
 
     <div class="tab-pane fade" id="leaderboard" role="tabpanel" aria-labelledby="leaderboard-tab">
