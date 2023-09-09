@@ -33,7 +33,6 @@ Clone the blueJaysApp repository to your local machine:
 
 ```shell
 git clone https://github.com/dnahon/blueJaysApp.git
-cd blueJaysApp
 ```
 
 ### 2. Navigate to the blueJaysApp Directory
