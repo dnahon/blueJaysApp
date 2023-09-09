@@ -1,6 +1,3 @@
-# blueJaysApp
-Certainly, I've made the adjustments you requested. Here's the updated documentation for the BlueJaysApp project:
-
 # blueJaysApp Project Documentation
 
 Welcome to the documentation for the blueJaysApp project. This documentation provides an overview of the project, its requirements, installation instructions, and usage guidelines. blueJaysApp is a Django-based web application designed to interact with APIs and display baseball-related data.
