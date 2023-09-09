@@ -1,10 +1,9 @@
 {% extends 'v2/base.html' %}
 
 {% block content %}
-<head>
 
-    <!-- Custom styles for this page -->
-    <style>
+{% block stylesheet %}
+<style>
         .first:first-child {
             background-color: #3e9fca !important;
             color:white
@@ -16,149 +15,161 @@
         .m-0 {
             color: white !important;
         }
-    </style>
-</head>
-<div class="row align-items-end px-3" >
-    <div class="col-1">
-        <div>
-            <img src="https://content.mlb.com/images/headshots/current/60x60/{{id}}@2x.png">
+
+    .vertical-align-pills {
+            display: flex;
+            justify-content: flex-end; /* Align pills to the right */
+            align-items: center; /* Vertically center pills */
+            height: 100px; /* Adjust the height as needed */
+        }
+        .page-container {
+            min-height: 100vh;
+        }
+</style>
+{% endblock stylesheet %}
+<div class="page-container">
+    <div class="row align-items-end px-3" >
+        <div class="col-1">
+            <div>
+                <img src="https://content.mlb.com/images/headshots/current/60x60/{{id}}@2x.png">
+            </div>
+        </div>
+        <div class=" col-8 ">
+            <h3 style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600;"> {{name}} </h3>
+            <h4 style="color: #3e9fca; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal; display: inline-block;"> {{position}} </h4>
+            <h4 style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal; display: inline-block;"> <a style="color:white" href ={% url 'team' team_id=team_id %}>{{team}}</a></h4>
+        </div>
+
+        <div class="col-3 justify-content-end vertical-align-pills">
+            <table class="table1">
+                    <tr style="background-color: #244D87; ">
+                        <th style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding-right: 15px;"> B/T </th>
+                        <th style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding-right: 15px;"> Age</th>
+                        <th style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding-right: 15px;"> Height </th>
+                        <th style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding-right: 15px;"> Weight</th>
+                        <th style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding-right: 15px;"> Drafted</th>
+                    </tr>
+                    <tr style="background-color: #244D87; ">
+                        <th style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding-right: 15px;"> {{bats}}/{{throws}} </th>
+                        <th style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding-right: 15px;"> {{age}}</th>
+                        <th style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding-right: 15px;"> {{height}} </th>
+                        <th style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding-right: 15px;"> {{weight}}</th>
+                        <th style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding-right: 15px;"> {{drafted}}</th>
+                    </tr>
+                </table>
         </div>
     </div>
-    <div class=" col-8 ">
-        <h3 style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600;"> {{name}} </h3>
-        <h4 style="color: #3e9fca; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal; display: inline-block; margin-top: 0;margin-bottom: 0;"> {{position}} </h4>
-        <h4 style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal; display: inline-block; margin-top: 0;margin-bottom: 0;"> <a style="color:white" href ={% url 'team' team_id=team_id %}>{{team}}</a></h4>
-    </div>
-
-    <div class="col-3 justify-content-end col-auto">
-        <table class="table1">
-                <tr style="background-color: #244D87; ">
-                    <th style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding-right: 15px;"> B/T </th>
-                    <th style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding-right: 15px;"> Age</th>
-                    <th style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding-right: 15px;"> Height </th>
-                    <th style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding-right: 15px;"> Weight</th>
-                    <th style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding-right: 15px;"> Drafted</th>
-                </tr>
-                <tr style="background-color: #244D87; ">
-                    <th style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding-right: 15px;"> {{bats}}/{{throws}} </th>
-                    <th style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding-right: 15px;"> {{age}}</th>
-                    <th style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding-right: 15px;"> {{height}} </th>
-                    <th style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding-right: 15px;"> {{weight}}</th>
-                    <th style="color: white; font-family: 'IBM Plex Sans Condensed'; font-weight: 600; font-style: normal;padding-right: 15px;"> {{drafted}}</th>
-                </tr>
-            </table>
-    </div>
-</div>
-<div class="row px-3">
-    <div class="col-12">
-        <div class="card shadow mb-4">
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr class="first">
-                                {% if position != 'P' %}
-                                    <th>Year</th>
-                                    <th>Team</th>
-                                    <th>G</th>
-                                    <th>PA</th>
-                                    <th>AB</th>
-                                    <th>R</th>
-                                    <th>H</th>
-                                    <th>2B</th>
-                                    <th>3B</th>
-                                    <th>HR</th>
-                                    <th>RBI</th>
-                                    <th>SB</th>
-                                    <th>BB</th>
-                                    <th>SO</th>
-                                    <th>OBP</th>
-                                    <th>SLG</th>
-                                    <th>OPS</th>
-                                {% else %}
-                                    <th>Year</th>
-                                    <th>Team</th>
-                                    <th>G</th>
-                                    <th>IP</th>
-                                    <th>W</th>
-                                    <th>L</th>
-                                    <th>SV</th>
-                                    <th>ERA</th>
-                                    <th>WHIP</th>
-                                    <th>H</th>
-                                    <th>R</th>
-                                    <th>SO</th>
-                                    <th>BB</th>
-                                    <th>HR/9</th>
-                                    <th>OPS</th>
-                                {% endif %}
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for season in list_of_stats %}
-
-
-                            {% if position != 'P' %}
-                            <tr>
-                                <td>{{season.season}}</td>
-                                <td> 
-                                    {% if season.team != "Multiple"%}
-                                    <svg width="30" height="30">       
-                                        <image xlink:href="https://www.mlbstatic.com/team-logos/{{season.team_id}}.svg" width="30" height="30"/>    
-                                    </svg>
-                                    <a href ={% url 'team' team_id=season.team_id %}>{{season.team}}</a>
+    <div class="row px-3">
+        <div class="col-12">
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr class="first">
+                                    {% if position != 'P' %}
+                                        <th>Year</th>
+                                        <th>Team</th>
+                                        <th>G</th>
+                                        <th>PA</th>
+                                        <th>AB</th>
+                                        <th>R</th>
+                                        <th>H</th>
+                                        <th>2B</th>
+                                        <th>3B</th>
+                                        <th>HR</th>
+                                        <th>RBI</th>
+                                        <th>SB</th>
+                                        <th>BB</th>
+                                        <th>SO</th>
+                                        <th>OBP</th>
+                                        <th>SLG</th>
+                                        <th>OPS</th>
                                     {% else %}
-                                    {{season.team}}
+                                        <th>Year</th>
+                                        <th>Team</th>
+                                        <th>G</th>
+                                        <th>IP</th>
+                                        <th>W</th>
+                                        <th>L</th>
+                                        <th>SV</th>
+                                        <th>ERA</th>
+                                        <th>WHIP</th>
+                                        <th>H</th>
+                                        <th>R</th>
+                                        <th>SO</th>
+                                        <th>BB</th>
+                                        <th>HR/9</th>
+                                        <th>OPS</th>
                                     {% endif %}
-                                </td>
-                                <td>{{season.gamesPlayed}}</td>
-                                <td>{{season.plateAppearances}}</td>
-                                <td>{{season.atBats}}</td>
-                                <td>{{season.runs}}</td>
-                                <td>{{season.hits}}</td>
-                                <td>{{season.doubles}}</td>
-                                <td>{{season.triples}}</td>
-                                <td>{{season.homeRuns}}</td>
-                                <td>{{season.rbi}}</td>
-                                <td>{{season.stolenBases}}</td>
-                                <td>{{season.baseOnBalls}}</td>
-                                <td>{{season.strikeOuts}}</td>
-                                <td>{{season.obp}}</td>
-                                <td>{{season.slg}}</td>
-                                <td>{{season.ops}}</td>
-                            </tr>
-                            {% else %}
-                            <tr>
-                                <td>{{season.season}}</td>
-                                <td> 
-                                    {% if season.team != "Multiple"%}
-                                    <svg width="30" height="30">       
-                                        <image xlink:href="https://www.mlbstatic.com/team-logos/{{season.team_id}}.svg" width="30" height="30"/>    
-                                    </svg>
-                                    <a href ={% url 'team' team_id=season.team_id %}>{{season.team}}</a>
-                                    {% else %}
-                                    {{season.team}}
-                                    {% endif %}                
-                                </td>
-                                <td>{{season.gamesPlayed}}</td>
-                                <td>{{season.inningsPitched}}</td>
-                                <td>{{season.wins}}</td>
-                                <td>{{season.losses}}</td>
-                                <td>{{season.saves}}</td>
-                                <td>{{season.era}}</td>
-                                <td>{{season.whip}}</td>
-                                <td>{{season.hits}}</td>
-                                <td>{{season.runs}}</td>
-                                <td>{{season.strikeOuts}}</td>
-                                <td>{{season.baseOnBalls}}</td>
-                                <td>{{season.homeRunsPer9}}</td>
-                                <td>{{season.ops}}</td>
-                            </tr>
-                            {% endif %}
-                        {% endfor %}
-                        </tbody>
-                    </table>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for season in list_of_stats %}
+
+
+                                {% if position != 'P' %}
+                                <tr>
+                                    <td>{{season.season}}</td>
+                                    <td> 
+                                        {% if season.team != "Multiple"%}
+                                        <svg width="30" height="30">       
+                                            <image xlink:href="https://www.mlbstatic.com/team-logos/{{season.team_id}}.svg" width="30" height="30"/>    
+                                        </svg>
+                                        <a href ={% url 'team' team_id=season.team_id %}>{{season.team}}</a>
+                                        {% else %}
+                                        {{season.team}}
+                                        {% endif %}
+                                    </td>
+                                    <td>{{season.gamesPlayed}}</td>
+                                    <td>{{season.plateAppearances}}</td>
+                                    <td>{{season.atBats}}</td>
+                                    <td>{{season.runs}}</td>
+                                    <td>{{season.hits}}</td>
+                                    <td>{{season.doubles}}</td>
+                                    <td>{{season.triples}}</td>
+                                    <td>{{season.homeRuns}}</td>
+                                    <td>{{season.rbi}}</td>
+                                    <td>{{season.stolenBases}}</td>
+                                    <td>{{season.baseOnBalls}}</td>
+                                    <td>{{season.strikeOuts}}</td>
+                                    <td>{{season.obp}}</td>
+                                    <td>{{season.slg}}</td>
+                                    <td>{{season.ops}}</td>
+                                </tr>
+                                {% else %}
+                                <tr>
+                                    <td>{{season.season}}</td>
+                                    <td> 
+                                        {% if season.team != "Multiple"%}
+                                        <svg width="30" height="30">       
+                                            <image xlink:href="https://www.mlbstatic.com/team-logos/{{season.team_id}}.svg" width="30" height="30"/>    
+                                        </svg>
+                                        <a href ={% url 'team' team_id=season.team_id %}>{{season.team}}</a>
+                                        {% else %}
+                                        {{season.team}}
+                                        {% endif %}                
+                                    </td>
+                                    <td>{{season.gamesPlayed}}</td>
+                                    <td>{{season.inningsPitched}}</td>
+                                    <td>{{season.wins}}</td>
+                                    <td>{{season.losses}}</td>
+                                    <td>{{season.saves}}</td>
+                                    <td>{{season.era}}</td>
+                                    <td>{{season.whip}}</td>
+                                    <td>{{season.hits}}</td>
+                                    <td>{{season.runs}}</td>
+                                    <td>{{season.strikeOuts}}</td>
+                                    <td>{{season.baseOnBalls}}</td>
+                                    <td>{{season.homeRunsPer9}}</td>
+                                    <td>{{season.ops}}</td>
+                                </tr>
+                                {% endif %}
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

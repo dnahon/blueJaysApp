@@ -12,16 +12,18 @@
 
     .nav-transparent-tabs .nav-item {
             margin-bottom: 0;
+            color: white !important;
         }
         .nav-transparent-tabs .nav-link {
             background: transparent;
             border: none;
-            color: #000; /* Unselected tab text color */
+            color: white; /* Unselected tab text color */
             border-radius: 0;
         }
         .nav-transparent-tabs .nav-link.active {
-            border-bottom: 2px solid #007bff; /* Selected tab highlight color */
-            color: #fff; /* Selected tab text color */
+            background: transparent;
+            border-bottom: 2px solid white; /* Selected tab highlight color */
+            color: white; /* Text color for unselected tabs */
         }
 
 </style>
@@ -47,7 +49,7 @@
 <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="team" role="tabpanel" aria-labelledby="team-tab">
         <div class="row px-6">
-            <div class="col-12">
+            <div class="col-12 my-4">
                 <h1 style="color: white; font-family: 'IBM Plex Sans Condensed'; " class="mb-2 d-block"> Teams </h1>
             </div>
 
@@ -99,7 +101,7 @@
             {% endfor %}
         </div>
         <div class="row px-6">
-            <div class="col-12">
+            <div class="col-12  my-4">
                 <h1 style="color: white; font-family: 'IBM Plex Sans Condensed'; " class="mb-2 d-block"> News </h1>
             </div>
 
@@ -125,7 +127,7 @@
 
     <div class="tab-pane fade" id="leaderboard" role="tabpanel" aria-labelledby="leaderboard-tab">
         <div class="row px-6">
-            <div class="col-12">
+            <div class="col-12  my-4">
                 <h1 style="color: white; font-family: 'IBM Plex Sans Condensed';"> Leaders </h1>
             </div>
         </div>
