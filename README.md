@@ -86,13 +86,22 @@ Here are the possible environment variables that you may need to configure, depe
 
 ---
 
-## Usage
+## App Usage
 
-Document how users can use your application, specifically blueJaysApp. Include information about:
+There are three main pages on the blueJaysApp:
 
-- How to interact with APIs and fetch/display baseball-related data.
-- Any other relevant features and functionality.
+- The homepage contains two tabs: one with MLB divisional standings and news, and the other tab with updated league leaders.
+- The team page contains information about every player on the roster. Users can switch between viewing the hitters and pitchers of the team.
+- The player page contains season-by-season stats for that player.
 
-Provide code examples and screenshots if possible to make it easy for users to understand how to use BlueJaysApp.
+This is how users can navigate between pages:
+
+- The homebase icon in the top bar navigatest to the homepage
+- Users can click on a news story hyperlink to open the article
+- Users can click on a team name abbreviation within the standings tables to navigate to the team's page
+- Users can click on a team name abbreviation within the league leaders tables to navigate to the team's page
+- Users can click on a player's name within the league leaders tables to navigate to the player's page
+- Users can click on a player's name within the team roster table to navigate to the player's page
+- User's can click on any team in the player stats table to navigate to the team's page
 
 ---
