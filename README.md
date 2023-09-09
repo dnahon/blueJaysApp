@@ -38,7 +38,7 @@ cd homebase
 
 ### 2. Navigate to the blueJaysApp Directory
 
-Navigate to the blueJaysApp directory within the Homebase repository:
+Navigate to the blueJaysApp directory:
 
 ```shell
 cd blueJaysApp
@@ -49,8 +49,8 @@ cd blueJaysApp
 It's a good practice to create a virtual environment to isolate project dependencies. To create one, run:
 
 ```shell
-python -m venv venv_homebase
-source venv_homebase/bin/activate  # On Windows, use: venv_homebase\Scripts\activate
+python -m venv venv_blueJaysApp
+source venv_blueJaysApp/bin/activate  # On Windows, use: venv_blueJaysApp\Scripts\activate
 ```
 
 ### 4. Install Dependencies
@@ -83,10 +83,6 @@ Here are the possible environment variables that you may need to configure, depe
 
 - `SECRET_KEY`: Django secret key for security.
 - `DEBUG`: Set to `True` for development and `False` for production.
-
-### Customization
-
-You can customize blueJaysApp by modifying templates, static files, and adding your own application logic. Refer to the [Django documentation](https://docs.djangoproject.com/) for more details on customization.
 
 ---
 
