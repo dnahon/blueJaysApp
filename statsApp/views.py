@@ -203,7 +203,6 @@ def home(request):
         game_data["game_state"] = game.get("status").get("codedGameState")
 
         #If the game is in progress or final, extract the score
-        print(game_data["game_state"])
         if game_data["game_state"] == "I" or game_data["game_state"] == "F":
             game_data["away_team_score"] = game.get("teams").get("away").get("score")
             game_data["home_team_score"] = game.get("teams").get("home").get("score")
